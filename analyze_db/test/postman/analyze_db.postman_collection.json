@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "4A83A788-D30F-4117-A98A-F7339BEB7E36",
+		"name": "analyze db",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "run agent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"provider\": \"{{provider}}\",\n    \"model\": \"{{model}}\",\n    \"baseurl\": \"{{baseurl}}\",\n    \"apikey\": \"{{apikey}}\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/run?prompt=",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"run"
+					],
+					"query": [
+						{
+							"key": "prompt",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

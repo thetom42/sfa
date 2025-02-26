@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug API: analyze_db",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "analyze_db.py",
+            "args": [
+                "-d",
+                "./data/analytics.sqlite",
+            ],
+            "env": {
+                "RUN_API": "true"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Debug: analyze_db",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "analyze_db.py",
+            "args": [
+                "-d",
+                "./data/analytics.sqlite",
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "cwd": "${workspaceFolder}"
+        },
+    ]
+}

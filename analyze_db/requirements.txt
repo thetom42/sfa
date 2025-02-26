@@ -1,0 +1,5 @@
+rich>=13.7.0
+python-dotenv
+pydantic_ai
+fastapi>=0.109.0
+uvicorn>=0.27.0
