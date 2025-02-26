@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sqlite-agent-config
+data:
+  model_name: "qwen2.5-14b-instruct-1m@6bit"
+  model_base_url: "http://localhost:1234/v1"  # Replace with actual model API URL in production

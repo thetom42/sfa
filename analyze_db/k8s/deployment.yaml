@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlite-agent
+  labels:
+    app: sqlite-agent
+spec:
+  replicas: 1  # SQLite doesn't support multiple concurrent writers, so we use only 1 replica
+  selector:
+    matchLabels:
+      app: sqlite-agent
+  template:
+    metadata:
+      labels:
+        app: sqlite-agent
+    spec:
+      containers:
+      - name: sqlite-agent
+        image: sqlite-agent:latest  # Replace with your actual image name/tag
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_PATH
+          value: "/data/database.sqlite"
+        - name: MODEL_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: sqlite-agent-config
+              key: model_name
+        - name: MODEL_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: sqlite-agent-config
+              key: model_base_url
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: sqlite-data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /healthz/live
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz/ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+      volumes:
+      - name: sqlite-data
+        persistentVolumeClaim:
+          claimName: sqlite-data-pvc

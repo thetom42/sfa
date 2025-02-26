@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - configmap.yaml
+  - pvc.yaml
+  - deployment.yaml
+  - service.yaml
+  # Uncomment the line below if you want to use Ingress
+  # - ingress.yaml
+
+# Namespace to deploy all resources to
+# namespace: sqlite-agent
+
+# Common labels to apply to all resources
+commonLabels:
+  app: sqlite-agent
+  environment: production
