@@ -22,7 +22,7 @@ import argparse
 import sqlite3
 import asyncio
 import os
-from typing import List, Dict, Any
+from typing import List
 from rich.console import Console
 from rich.panel import Panel
 import dotenv
